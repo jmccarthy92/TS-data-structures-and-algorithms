@@ -1,4 +1,4 @@
-export function(stringA: string, stringB: string){
+export function needleInHaystack(stringA: string, stringB: string){
     let haystackNdx = -1;
     if(stringB.length > stringA.length || !(stringA.length && stringB.length)) return haystackNdx;
     if(stringA.length === stringB.length) {

@@ -31,19 +31,3 @@ export class QuickSort {
         return left;
     }
 }
-
-
-function combinations(num: number) {
-    const result: number[][] = [];
-    combinationsRecursive([], num.toString().split('').map(num => +num), result);
-    return result;
-}
-
-function combinationsRecursive(active: number[], rest: number[], result: number[][]) {
-    if(!rest.length) {
-        if(active.length) result.push(active);
-    } else {
-        combinationsRecursive([...active, rest[0]], rest.slice(1,rest.length), result)
-        combinationsRecursive(active, rest.slice(1,rest.length), result)
-    }
-}

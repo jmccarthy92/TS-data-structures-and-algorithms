@@ -11,17 +11,30 @@ function isValid(str: string) {
     return count === 0;
 }
 
-function invalidParentheses(str: string): string[] {
-    // if empty string or is already valid
-    if(!str.length || isValid(str)) return [str];
-    const set: Set<string> = new Set();
-    for(let i =0; i < str.length; i++) {
-        const temp = str.slice(0, i) + str.slice(i + 1, str.length);
-
-        if(isValid(temp)) {
-            set.add(temp);
+const removeInvalidParentheses = function(s: string): string[] {
+    const queue: string[] = [];
+    const visited: Set<string> = new Set();
+    queue.push(s);
+    const result: string[] = [];
+    let found = false;
+      
+    while(queue.length !== 0) {
+      var str: string = queue.shift() as string;
+      if(isValid(str)) {
+        result.push(str);
+        return result;
+      } else if(!found){   
+        for(let i = 0; i < s.length; i++) {
+          if(str[i] === "(" || str[i] === ")") {
+            var subStr = str.slice(0, i) + str.slice(i + 1, s.length);
+            if(!visited.has(subStr)) {
+              queue.push(subStr);   
+              visited.add(subStr);
+            }
+          }    
         }
+      }
     }
-    return [...set];
-
-}
+    
+    return result;
+  };
