@@ -12,26 +12,6 @@
       "strict": true,
       "target": "es6",
       "moduleResolution": "node",
-    //   "paths": {
-    //     "@Data/*": [
-    //       "src/Data/*"
-    //     ],
-    //     "@Business/*": [
-    //       "src/Business/*"
-    //     ],
-    //     "@API/*": [
-    //       "src/API/*",
-    //     ],
-    //     "@Core/*": [
-    //       "src/Core/*"
-    //     ],
-    //     "@App": [
-    //       "src/App.ts"
-    //     ],
-    //     "@Config": [
-    //       "src/Core/config.ts"
-    //     ],
-    //   },
       "types": [
         "node"
       ],

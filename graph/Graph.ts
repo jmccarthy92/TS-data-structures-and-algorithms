@@ -53,16 +53,30 @@ class Graph<T> {
 
     }
 
-    // public depthFirstSearch(): T[] {
+    public dfs(start: T, end: T): boolean {
+        const visited: Set<T> = new Set();
+        const stack: Vertex<T>[] = [];
+        const startNode = this.findVertex(start);
+        if(!startNode) return false;
+        stack.push(startNode);
+        while(stack.length > 0) {
+            let current = stack.pop();
+            if(current?.value === end){
+                return true;
+            }
+            if(current?.edges) {
+                for(let edge of current.edges) {
+                    if(!visited.has(edge.value)){
+                        stack.push(edge);
+                    }
+                }
+                visited.add(current.value);
 
-    // }
+            }
+        }
+        return false;
+
+    }
 }
 
-
-
-
-
-export function aVeryBigSum(numbers: number[]): number {
-    return numbers.reduce((acc, number) => number + acc, 0);
-}
 
