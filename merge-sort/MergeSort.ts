@@ -1,65 +1,55 @@
 export class MergeSort {
-  public static run(values: number[]): void {
+  public static sort(values: number[]): number[] {
     // memoize our temporary array so it's only created once
     this.mergeSort(values, [], 0, values.length - 1);
+    return values;
   }
 
   private static mergeSort(
     values: number[],
     temp: number[],
-    leftStart: number,
-    rightEnd: number
+    start: number,
+    end: number
   ): void {
     // Base-case
-    if (leftStart >= rightEnd) return;
+    if (start >= end) return;
 
-    const middle = Math.floor((rightEnd + leftStart) / 2);
-    this.mergeSort(values, temp, leftStart, middle);
-    this.mergeSort(values, temp, middle + 1, rightEnd);
-    this.mergeHalves(values, temp, leftStart, rightEnd);
+    const middle = Math.floor((start + end) / 2);
+    this.mergeSort(values, temp, start, middle);
+    this.mergeSort(values, temp, middle + 1, end);
+    this.mergeHalves(values, temp, start, middle, end);
   }
 
   private static mergeHalves(
     values: number[],
     temp: number[],
-    leftStart: number,
-    rightEnd: number
+    start: number,
+    middle: number,
+    end: number,
   ): void {
-    const leftEnd = Math.floor((rightEnd + leftStart) / 2);
-    let rightStart = leftEnd + 1;
-    const size = rightEnd - leftStart + 1;
+    // Copy both halves into temp array.
+    for(let i = start; i <= end; i++) {
+      temp[i] = values[i];
+    }
 
-    let right = rightStart;
-    let left = leftStart;
-    let index = leftStart;
+    let tempStart = start;
+    let tempEnd = middle + 1;
+    let current = start;
 
-    while (left <= leftEnd && right <= rightEnd) {
-      if (values[left] <= values[right]) {
-        temp[index] = values[left];
-        left++;
+    while(tempStart <= middle && tempEnd <= end){
+      if(temp[tempStart] <= temp[tempEnd]){
+        values[current] = temp[tempStart];
+        tempStart++;
       } else {
-        temp[index] = values[right];
-        right++;
-      }
-      index++;
+        values[current] = temp[tempEnd];
+        tempEnd++;
+      } 
+      current++;
     }
 
-    for (
-      let leftIndex = left, tempIndex = index;
-      leftIndex <= leftEnd;
-      leftIndex++, tempIndex++
-    ) {
-      temp[tempIndex] = values[leftIndex];
-    }
-    for (
-      let rightIndex = right, tempIndex = index;
-      rightIndex <= rightEnd;
-      rightIndex++, tempIndex++
-    ) {
-      temp[tempIndex] = values[rightIndex];
-    }
-    for (let i = leftStart; i < leftStart + size; i++) {
-      values[i] = temp[i];
+    let remaining = middle - tempStart;
+    for(let i = 0; i <= remaining; i++) {
+      values[current + i] = temp[tempStart + i]
     }
   }
 }

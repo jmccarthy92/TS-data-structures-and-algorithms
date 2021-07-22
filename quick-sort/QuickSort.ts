@@ -22,12 +22,16 @@ export class QuickSort {
 
             if(left <= right) {
                 // swap elements and increment/decrement pointers
-                const temp = array[right];
-                array[right] = array[left];
-                array[left] = temp;
-                left++, right--; 
+                this.swap(array, left, right)
+                left++, right--;
             }  
         }
         return left;
+    }
+
+    public swap(arr: number[], left: number, right: number): void {
+        const temp = arr[right];
+        arr[right] = arr[left];
+        arr[left] = temp;
     }
 }
