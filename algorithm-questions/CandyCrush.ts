@@ -7,8 +7,8 @@ Array.prototype.peak = function() {
 }
 
 function candyCrush(input: string): string {
-  const stack = [];
-  stack.push(input[0]); // a
+  const stack: string[] = [];
+  stack.push(input[0]);
   let j = 1;
   for(let i = 1; i < input.length; i += j) { 
        let tos = stack.peak(); 
