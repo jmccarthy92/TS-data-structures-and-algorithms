@@ -16,29 +16,14 @@ function addTwoNumbers(
   while (currentA || currentB) {
     let sum = 0;
     if (currentA && currentA.value > -1 && currentB && currentB.value > -1) {
-    sum = currentA.value + currentB.value + carry;
-      if (sum > 9) {
-        [carry, sum] = getCarryAndSum(sum);
-      } else {
-        carry = 0;
-      }
+      [carry, sum] =  getCarryAndSum(currentA.value + currentB.value + carry);
       currentA = currentA.next;
       currentB = currentB.next;
     } else if (currentA && currentA.value > -1) {
-      sum = currentA.value + carry;
-      if (sum > 9) {
-        [carry, sum] = getCarryAndSum(sum);
-      } else {
-        carry = 0;
-      }
+      [carry, sum] =  getCarryAndSum(currentA.value + carry);
       currentA = currentA.next;
     } else if (currentB && currentB.value > -1) {
-       sum = currentB.value + carry;
-      if (sum > 9) {
-        [carry, sum] = getCarryAndSum(sum);
-      } else {
-        carry = 0;
-      }
+       [carry, sum] = getCarryAndSum(currentB.value + carry);
       currentB = currentB.next;
     }
 
@@ -58,6 +43,12 @@ function addTwoNumbers(
 }
 
 function getCarryAndSum(num: number): [number, number] {
-  const [carry, sum] = num.toString();
-  return [parseInt(carry, 10), parseInt(sum, 10)];
+  let carry = 0;
+  let sum = num;
+  if(num > 9){
+    const [c, s] = num.toString();
+    carry = parseInt(c, 10);
+    sum = parseInt(s, 10);
+  } 
+  return [carry, sum];
 }
